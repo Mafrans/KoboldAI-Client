@@ -1,4 +1,4 @@
-export enum FromServerMessage {
+export enum ServerMessage {
   SET_CHAT_NAME = "setchatname",
   SET_AUTHOR_NOTE_TEMPLATE = "setanotetemplate",
   CONNECTED = "connected",
@@ -100,4 +100,44 @@ export enum FromServerMessage {
   POPUP_ERROR = "popuperror",
   ADD_IMPORT_LINE = "addimportline",
   DEBUG_INFO = "debug_info",
+  HIDE_MESSAGE = "hidemsg",
+}
+
+export enum ClientMessage {
+  SUBMIT = "submit",
+}
+
+export type ServerValue = {
+  [ServerMessage.SET_GAME_STATE]: {
+    data: GameState;
+  };
+  [ServerMessage.UPDATE_CHUNK]: {
+    data: {
+      index: number;
+      html: string;
+    };
+  };
+  [ServerMessage.HIDE_MESSAGE]: undefined;
+  [ServerMessage.TEXT_EFFECT]: {
+    data: number;
+  };
+  [ServerMessage.SCROLL_DOWN]: undefined;
+};
+
+export type ClientValue = {
+  [ClientMessage.SUBMIT]: {
+    actionmode: ActionMode;
+    allowabort: boolean;
+    data: string;
+  };
+};
+
+enum GameState {
+  READY = "ready",
+  WAIT = "wait",
+}
+
+enum ActionMode {
+  STORY,
+  ACTION,
 }

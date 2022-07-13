@@ -6,6 +6,7 @@ import "./style/main.css";
 @customElement("x-app")
 export class App extends LitElement {
   render() {
+    // socket.send("test");
     return html` <div>Hello World!</div>`;
   }
 }
