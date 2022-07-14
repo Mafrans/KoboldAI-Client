@@ -9,7 +9,7 @@ export class TextField extends LitElement {
       appearance: none;
       border: none;
       width: 100%;
-      padding: 12px;
+      padding: 16px;
       background-color: var(--color-slate-200);
       border-radius: 8px;
     }
