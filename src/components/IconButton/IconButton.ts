@@ -9,13 +9,22 @@ import "../Icon/Icon";
 export class IconButton extends LitElement {
   static styles = css`
     button {
-      padding: 12px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-radius: 999px;
       border: none;
       background: var(--color-indigo-200);
       color: var(--color-indigo-900);
       cursor: pointer;
       transition: opacity 125ms ease, transform 125ms ease;
+    }
+
+    button:focus-visible {
+      outline: var(--outline-focus);
+      outline-offset: 3px;
     }
 
     button:hover {

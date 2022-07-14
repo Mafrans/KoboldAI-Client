@@ -2,14 +2,12 @@ import "@fontsource/inter";
 import { css, html, LitElement } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import "./style/main.css";
+import { GameState, ServerMessage } from "./utils/messages";
 import { socket } from "./utils/socket";
 
-// Components
-import "./components/IconButton/IconButton";
+import "./components/ControlPanel/ControlPanel";
 import "./components/Navbar/Navbar";
-import "./components/TextField/TextField";
 import "./components/TextPanel/TextPanel";
-import { GameState, ServerMessage } from "./utils/messages";
 
 @customElement("x-app")
 export class App extends LitElement {
@@ -38,17 +36,7 @@ export class App extends LitElement {
       padding: 16px 0;
       flex-direction: column;
     }
-
-    main form {
-      display: grid;
-      grid-template-columns: 1fr max-content;
-      margin: 0;
-      gap: 16px;
-    }
   `;
-
-  @state()
-  inputText: string = "";
 
   @state()
   gameState: GameState = GameState.READY;
@@ -66,26 +54,7 @@ export class App extends LitElement {
       }
     });
   }
-
-  handleInput({ detail: { value } }: CustomEvent) {
-    this.inputText = value;
-  }
-
-  handleSubmit() {
-    socket.send({
-      cmd: "submit",
-      allowabort: true,
-      actionmode: 0,
-      data: this.inputText,
-    });
-
-    this.inputText = "";
-    this.requestUpdate();
-  }
-
   render() {
-    const waiting = this.gameState === GameState.WAIT;
-
     return html`
       <div class="app">
         <x-navbar></x-navbar>
@@ -94,20 +63,9 @@ export class App extends LitElement {
 
         <main>
           <x-textpanel></x-textpanel>
-          <form method="dialog">
-            <x-text-field
-              value=${this.inputText}
-              type="text"
-              name="text"
-              @input=${this.handleInput}
-            ></x-text-field>
-
-            <x-icon-button
-              icon=${waiting ? "spinner" : "corner-down-right"}
-              ?disabled=${waiting}
-              @click=${this.handleSubmit}
-            ></x-icon-button>
-          </form>
+          <x-control-panel
+            ?waiting=${this.gameState === GameState.WAIT}
+          ></x-control-panel>
         </main>
 
         <aside></aside>
