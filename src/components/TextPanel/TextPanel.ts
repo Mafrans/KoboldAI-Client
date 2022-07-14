@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { parseChunkContent } from "../../utils/chunk";
+import { parseChunks } from "../../utils/chunk";
 import { ServerMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
 
@@ -24,22 +24,26 @@ export class TextPanel extends LitElement {
     super();
 
     socket.on("from_server", ({ cmd, data }) => {
+      console.log({ cmd, data });
       switch (cmd) {
         case ServerMessage.UPDATE_CHUNK:
-          this.onUpdateChunk(data);
+          this.updateChunks(data.html);
+
+        case ServerMessage.UPDATE_SCREEN:
+          this.updateChunks(data);
       }
     });
   }
 
-  onUpdateChunk(data: any) {
-    const content = parseChunkContent(data.html);
+  updateChunks(html: string) {
+    const chunks = parseChunks(html);
 
-    if (content) {
-      this.chunks[data.index] = content;
+    for (const chunk of chunks) {
+      this.chunks[chunk.index] = chunk.content;
       this.requestUpdate();
     }
 
-    console.log({ data });
+    console.log({ chunks });
     return;
   }
 
