@@ -1,4 +1,4 @@
-type Chunk = {
+export type Chunk = {
   id: number;
   content: string;
 };

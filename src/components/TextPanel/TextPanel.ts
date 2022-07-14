@@ -46,10 +46,9 @@ export class TextPanel extends LitElement {
 
     for (const chunk of chunks) {
       this.chunks[chunk.id] = chunk.content;
-      this.requestUpdate();
     }
 
-    return;
+    this.requestUpdate();
   }
 
   removeChunk(id: number) {

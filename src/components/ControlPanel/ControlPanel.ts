@@ -19,6 +19,8 @@ export class ControlPanel extends LitElement {
     }
 
     .controls {
+      display: flex;
+      gap: 8px;
       margin-bottom: 8px;
     }
   `;
@@ -29,6 +31,9 @@ export class ControlPanel extends LitElement {
   @state()
   inputText: string = "";
 
+  @state()
+  undoCount: number = 0;
+
   handleInput({ detail: { value } }: CustomEvent) {
     this.inputText = value;
   }
@@ -36,26 +41,45 @@ export class ControlPanel extends LitElement {
   handleUndo() {
     socket.send({
       cmd: ClientMessage.UNDO,
-      data: this.inputText,
     });
+
+    this.undoCount++;
   }
 
-  handleSubmit() {
+  handleRedo() {
+    socket.send({
+      cmd: ClientMessage.REDO,
+    });
+
+    this.undoCount--;
+  }
+
+  submitContent(content: string) {
     socket.send({
       cmd: ClientMessage.SUBMIT,
       allowabort: true,
       actionmode: 0,
-      data: this.inputText,
+      data: content,
     });
 
     this.inputText = "";
+    this.undoCount = 0;
     this.requestUpdate();
+  }
+
+  handleSubmit() {
+    this.submitContent(this.inputText);
   }
 
   render() {
     return html`
       <div class="controls">
         <x-icon-button @click=${this.handleUndo} icon="undo"></x-icon-button>
+        <x-icon-button
+          @click=${this.handleRedo}
+          ?disabled=${this.undoCount <= 0}
+          icon="redo"
+        ></x-icon-button>
       </div>
       <div class="input">
         <x-text-field

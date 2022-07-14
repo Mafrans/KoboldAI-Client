@@ -7,6 +7,7 @@ import { socket } from "./utils/socket";
 
 import "./components/ControlPanel/ControlPanel";
 import "./components/Navbar/Navbar";
+import "./components/SequencePanel/SequencePanel";
 import "./components/TextPanel/TextPanel";
 
 @customElement("x-app")
@@ -63,6 +64,7 @@ export class App extends LitElement {
 
         <main>
           <x-textpanel></x-textpanel>
+          <x-sequence-panel></x-sequence-panel>
           <x-control-panel
             ?waiting=${this.gameState === GameState.WAIT}
           ></x-control-panel>
