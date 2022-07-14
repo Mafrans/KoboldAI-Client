@@ -19,7 +19,7 @@ export class App extends LitElement {
       grid-template-columns: 1fr 4fr 1fr;
       grid-template-rows: 70px 1fr;
 
-      min-height: 100vh;
+      height: 100vh;
     }
 
     x-navbar {
@@ -31,8 +31,11 @@ export class App extends LitElement {
     }
 
     main {
-      height: 100%;
+      box-sizing: border-box;
+      height: calc(100vh - 70px);
       display: flex;
+      gap: 16px;
+      padding: 16px 0;
       flex-direction: column;
     }
 
@@ -86,7 +89,9 @@ export class App extends LitElement {
     return html`
       <div class="app">
         <x-navbar></x-navbar>
+
         <aside></aside>
+
         <main>
           <x-textpanel></x-textpanel>
           <form method="dialog">
@@ -104,6 +109,8 @@ export class App extends LitElement {
             ></x-icon-button>
           </form>
         </main>
+
+        <aside></aside>
       </div>
     `;
   }
