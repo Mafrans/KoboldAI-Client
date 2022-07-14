@@ -32,7 +32,7 @@ export class App extends LitElement {
       box-sizing: border-box;
       height: calc(100vh - 70px);
       display: flex;
-      gap: 16px;
+      gap: 8px;
       padding: 16px 0;
       flex-direction: column;
     }

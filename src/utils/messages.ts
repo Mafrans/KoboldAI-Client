@@ -105,6 +105,8 @@ export enum ServerMessage {
 
 export enum ClientMessage {
   SUBMIT = "submit",
+  UNDO = "back",
+  REDO = "redo",
 }
 
 export enum GameState {

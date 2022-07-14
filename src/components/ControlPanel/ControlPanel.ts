@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { ClientMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
 
 import "../IconButton/IconButton";
@@ -32,9 +33,16 @@ export class ControlPanel extends LitElement {
     this.inputText = value;
   }
 
+  handleUndo() {
+    socket.send({
+      cmd: ClientMessage.UNDO,
+      data: this.inputText,
+    });
+  }
+
   handleSubmit() {
     socket.send({
-      cmd: "submit",
+      cmd: ClientMessage.SUBMIT,
       allowabort: true,
       actionmode: 0,
       data: this.inputText,
@@ -47,7 +55,7 @@ export class ControlPanel extends LitElement {
   render() {
     return html`
       <div class="controls">
-        <x-icon-button icon="undo"></x-icon-button>
+        <x-icon-button @click=${this.handleUndo} icon="undo"></x-icon-button>
       </div>
       <div class="input">
         <x-text-field

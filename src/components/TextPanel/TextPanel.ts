@@ -19,7 +19,7 @@ export class TextPanel extends LitElement {
   `;
 
   @state()
-  chunks: string[] = [];
+  chunks: Record<number, string> = [];
 
   constructor() {
     super();
@@ -29,9 +29,14 @@ export class TextPanel extends LitElement {
       switch (cmd) {
         case ServerMessage.UPDATE_CHUNK:
           this.updateChunks(data.html);
+          break;
 
         case ServerMessage.UPDATE_SCREEN:
           this.updateChunks(data);
+          break;
+
+        case ServerMessage.REMOVE_CHUNK:
+          this.removeChunk(data);
       }
     });
   }
@@ -40,17 +45,23 @@ export class TextPanel extends LitElement {
     const chunks = parseChunks(html);
 
     for (const chunk of chunks) {
-      this.chunks[chunk.index] = chunk.content;
+      this.chunks[chunk.id] = chunk.content;
       this.requestUpdate();
     }
 
-    console.log({ chunks });
     return;
+  }
+
+  removeChunk(id: number) {
+    delete this.chunks[id];
+    this.requestUpdate();
   }
 
   render() {
     return html` <div>
-      ${this.chunks.map((chunk) => html`<x-chunk content=${chunk}></x-chunk>`)}
+      ${Object.entries(this.chunks).map(
+        ([_, chunk]) => html`<x-chunk content=${chunk}></x-chunk>`
+      )}
     </div>`;
   }
 }

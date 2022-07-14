@@ -1,5 +1,5 @@
 type Chunk = {
-  index: number;
+  id: number;
   content: string;
 };
 
@@ -11,8 +11,8 @@ export function parseChunks(html: string): Chunk[] {
 
   return chunks
     .map((chunk) => ({
+      id: Number(chunk.getAttribute("n")),
       content: chunk.innerHTML ?? "",
-      index: Number(chunk.getAttribute("n")),
     }))
-    .filter((chunk) => !isNaN(chunk.index));
+    .filter((chunk) => !isNaN(chunk.id));
 }
