@@ -1,43 +1,22 @@
 import "@fontsource/inter";
 import { html, LitElement } from "lit";
-import { customElement, query, state } from "lit/decorators.js";
-import "./components/Chunk";
+import { customElement, query } from "lit/decorators.js";
 import "./style/main.css";
-import { parseChunkContent } from "./utils/chunk";
-import { ServerMessage } from "./utils/messages";
 import { socket } from "./utils/socket";
+
+// Components
+import "./components/TextPanel/TextPanel";
 
 @customElement("x-app")
 export class App extends LitElement {
-  @state()
-  chunks: string[] = [];
-
-  @state()
-  sid?: string;
-
   @query("input")
   input?: HTMLInputElement;
 
   constructor() {
     super();
-
-    socket.on("from_server", ({ cmd, data }) => {
-      switch (cmd) {
-        case ServerMessage.UPDATE_CHUNK:
-          const content = parseChunkContent(data.html);
-
-          if (content) {
-            this.chunks[data.index] = content;
-            this.requestUpdate();
-          }
-
-          console.log({ data });
-          return;
-      }
-    });
   }
 
-  onSubmit() {
+  handleSubmit() {
     socket.send({
       cmd: "submit",
       allowabort: true,
@@ -47,10 +26,10 @@ export class App extends LitElement {
   }
 
   render() {
-    return html` <div>
-      ${this.chunks.map((chunk) => html`<x-chunk content=${chunk}></x-chunk>`)}
+    return html`
+      <x-textpanel></x-textpanel>
       <input type="text" />
-      <button type="button" @click=${this.onSubmit}>Submit</button>
-    </div>`;
+      <button type="button" @click=${this.handleSubmit}>Submit</button>
+    `;
   }
 }
