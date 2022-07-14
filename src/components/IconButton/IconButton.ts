@@ -26,14 +26,22 @@ export class IconButton extends LitElement {
       transform: scale(0.9);
       transition: 50ms ease;
     }
+
+    button:disabled {
+      opacity: 0.75;
+      pointer-events: none;
+    }
   `;
 
   @property()
   icon: IconType = "shape-circle";
 
+  @property({ type: Boolean })
+  disabled: boolean = false;
+
   render() {
     return html`
-      <button>
+      <button ?disabled=${this.disabled}>
         <x-icon icon=${this.icon}></x-icon>
       </button>
     `;
