@@ -8,6 +8,10 @@ import "../Icon/Icon";
 @customElement("x-icon-button")
 export class IconButton extends LitElement {
   static styles = css`
+    :host {
+      display: contents;
+    }
+
     button {
       width: 42px;
       height: 42px;
