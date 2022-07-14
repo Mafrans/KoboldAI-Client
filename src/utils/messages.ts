@@ -107,37 +107,12 @@ export enum ClientMessage {
   SUBMIT = "submit",
 }
 
-export type ServerValue = {
-  [ServerMessage.SET_GAME_STATE]: {
-    data: GameState;
-  };
-  [ServerMessage.UPDATE_CHUNK]: {
-    data: {
-      index: number;
-      html: string;
-    };
-  };
-  [ServerMessage.HIDE_MESSAGE]: undefined;
-  [ServerMessage.TEXT_EFFECT]: {
-    data: number;
-  };
-  [ServerMessage.SCROLL_DOWN]: undefined;
-};
-
-export type ClientValue = {
-  [ClientMessage.SUBMIT]: {
-    actionmode: ActionMode;
-    allowabort: boolean;
-    data: string;
-  };
-};
-
-enum GameState {
+export enum GameState {
   READY = "ready",
   WAIT = "wait",
 }
 
-enum ActionMode {
+export enum ActionMode {
   STORY,
   ACTION,
 }

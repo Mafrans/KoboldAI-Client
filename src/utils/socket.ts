@@ -1,10 +1,3 @@
-class Socket {
-  ws: WebSocket;
-  constructor() {
-    const url = new URL("ws://127.0.0.1:5000/socket.io");
-    url.searchParams.set("transport", "websocket");
-    this.ws = new WebSocket(url.href);
+import { io } from "socket.io-client";
 
-    this.ws.addEventListener("message", console.log);
-  }
-}
+export const socket = io("http://localhost:5000");
