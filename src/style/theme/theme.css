@@ -1,0 +1,5 @@
+@import "./colors.css";
+
+:root {
+  --outline-focus: var(--color-indigo-500) solid 3px;
+}

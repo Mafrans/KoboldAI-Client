@@ -1,0 +1,15 @@
+export type TextFieldType =
+  | "hidden"
+  | "text"
+  | "search"
+  | "tel"
+  | "url"
+  | "email"
+  | "password"
+  | "datetime"
+  | "date"
+  | "month"
+  | "week"
+  | "time"
+  | "datetime-local"
+  | "color";

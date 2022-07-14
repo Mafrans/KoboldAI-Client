@@ -6,6 +6,7 @@ import { socket } from "./utils/socket";
 
 // Components
 import "./components/Navbar/Navbar";
+import "./components/TextField/TextField";
 import "./components/TextPanel/TextPanel";
 
 @customElement("x-app")
@@ -23,17 +24,17 @@ export class App extends LitElement {
       grid-column: span 3;
     }
 
+    x-textpanel {
+      flex: 1;
+    }
+
     main {
       height: 100%;
       display: flex;
       flex-direction: column;
     }
 
-    x-textpanel {
-      flex: 1;
-    }
-
-    main form {
+    main fieldset {
       display: grid;
       grid-template-columns: 1fr max-content;
       margin: 0;
@@ -63,10 +64,10 @@ export class App extends LitElement {
         <aside></aside>
         <main>
           <x-textpanel></x-textpanel>
-          <form>
-            <input type="text" />
+          <fieldset>
+            <x-text-field type="text"></x-text-field>
             <button type="button" @click=${this.handleSubmit}>Submit</button>
-          </form>
+          </fieldset>
         </main>
       </div>
     `;
