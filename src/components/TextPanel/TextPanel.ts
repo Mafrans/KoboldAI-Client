@@ -1,4 +1,4 @@
-import { html, LitElement } from "lit";
+import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { parseChunkContent } from "../../utils/chunk";
 import { ServerMessage } from "../../utils/messages";
@@ -9,6 +9,14 @@ import "../Chunk/Chunk";
 
 @customElement("x-textpanel")
 export class TextPanel extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  `;
+
   @state()
   chunks: string[] = [];
 
