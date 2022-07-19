@@ -1,25 +1,34 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { parseChunks } from "../../utils/chunk";
+import { map } from "lit/directives/map.js";
+import { globalStyles } from "../../style/styles";
+import { hasChunks, parseChunks } from "../../utils/chunk";
 import { ServerMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
+import { isEmpty } from "../../utils/util";
 
 // Components
 import "../Chunk/Chunk";
 
 @customElement("x-textpanel")
 export class TextPanel extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      height: 100%;
-      width: 100%;
-      overflow-y: scroll;
-    }
-  `;
+  static styles = [
+    ...globalStyles,
+    css`
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+      }
+    `,
+  ];
 
   @state()
   chunks: Record<number, string> = [];
+
+  @state()
+  initialChunk: string = "";
 
   constructor() {
     super();
@@ -32,7 +41,11 @@ export class TextPanel extends LitElement {
           break;
 
         case ServerMessage.UPDATE_SCREEN:
-          this.updateChunks(data);
+          if (hasChunks(data)) {
+            this.updateChunks(data);
+          } else {
+            this.setInitialChunk(data);
+          }
           break;
 
         case ServerMessage.REMOVE_CHUNK:
@@ -51,15 +64,25 @@ export class TextPanel extends LitElement {
     this.requestUpdate();
   }
 
+  setInitialChunk(html: string) {
+    this.chunks = [];
+    this.initialChunk = html;
+  }
+
   removeChunk(id: number) {
     delete this.chunks[id];
     this.requestUpdate();
   }
 
   render() {
-    return html` <div>
-      ${Object.entries(this.chunks).map(
-        ([_, chunk]) => html`<x-chunk content=${chunk}></x-chunk>`
+    if (isEmpty(this.chunks)) {
+      return html`<x-chunk content=${this.initialChunk}></x-chunk> `;
+    }
+
+    return html`<div>
+      ${map(
+        Object.entries(this.chunks),
+        ([_, chunk]) => html`<x-chunk editable content=${chunk}></x-chunk>`
       )}
     </div>`;
   }

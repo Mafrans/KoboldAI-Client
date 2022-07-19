@@ -16,3 +16,8 @@ export function parseChunks(html: string): Chunk[] {
     }))
     .filter((chunk) => !isNaN(chunk.id));
 }
+
+export function hasChunks(html: string): boolean {
+  const document = parser.parseFromString(html, "text/html");
+  return document.querySelectorAll("chunk").length > 0;
+}

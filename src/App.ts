@@ -1,7 +1,7 @@
 import "@fontsource/inter";
 import { css, html, LitElement } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
-import "./style/main.css";
+import "./style/styles.ts";
 import { GameState, ServerMessage } from "./utils/messages";
 import { socket } from "./utils/socket";
 

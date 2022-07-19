@@ -1,25 +1,29 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
+import { globalStyles } from "../../style/styles";
 import { TextFieldType } from "./types";
 
 @customElement("x-text-field")
 export class TextField extends LitElement {
-  static styles = css`
-    input {
-      appearance: none;
-      border: none;
-      width: 100%;
-      padding: 16px;
-      background-color: var(--color-slate-200);
-      border-radius: 8px;
-    }
+  static styles = [
+    ...globalStyles,
+    css`
+      input {
+        appearance: none;
+        border: none;
+        width: 100%;
+        padding: 16px;
+        background-color: var(--color-slate-200);
+        border-radius: 8px;
+      }
 
-    input:focus {
-      outline: var(--outline-focus);
-      outline-offset: 3px;
-    }
-  `;
+      input:focus {
+        outline: var(--outline-focus);
+        outline-offset: 3px;
+      }
+    `,
+  ];
 
   @property()
   value: string = "";

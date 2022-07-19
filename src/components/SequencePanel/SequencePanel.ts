@@ -1,27 +1,31 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { globalStyles } from "../../style/styles";
 import { ServerMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
 import { Sequence } from "./types";
 
 @customElement("x-sequence-panel")
 export class SequencePanel extends LitElement {
-  static styles = css`
-    .sequence-panel {
-      background-color: var(--color-slate-100);
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-radius: 12px;
-    }
+  static styles = [
+    ...globalStyles,
+    css`
+      .sequence-panel {
+        background-color: var(--color-slate-100);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-radius: 12px;
+      }
 
-    .sequence {
-      background-color: var(--color-slate-200);
-      padding: 8px;
-      border-radius: 12px;
-    }
-  `;
+      .sequence {
+        background-color: var(--color-slate-200);
+        padding: 8px;
+        border-radius: 12px;
+      }
+    `,
+  ];
 
   @state()
   sequences: Sequence[] = [];

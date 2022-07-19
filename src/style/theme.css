@@ -1,4 +1,7 @@
+
 :root {
+  --outline-focus: var(--color-indigo-500) solid 3px;
+
   --color-black: rgb(0 0 0);
   --color-white: rgb(255 255 255);
   --color-slate-50: rgb(248 250 252);

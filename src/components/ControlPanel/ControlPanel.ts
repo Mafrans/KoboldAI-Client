@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { globalStyles } from "../../style/styles";
 import { ClientMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
 
@@ -8,22 +9,25 @@ import "../TextField/TextField";
 
 @customElement("x-control-panel")
 export class ControlPanel extends LitElement {
-  static styles = css`
-    .input {
-      display: flex;
-      gap: 16px;
-    }
+  static styles = [
+    ...globalStyles,
+    css`
+      .input {
+        display: flex;
+        gap: 16px;
+      }
 
-    .input x-text-field {
-      flex: 1;
-    }
+      .input x-text-field {
+        flex: 1;
+      }
 
-    .controls {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-  `;
+      .controls {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+    `,
+  ];
 
   @property({ type: Boolean })
   waiting: boolean = false;
