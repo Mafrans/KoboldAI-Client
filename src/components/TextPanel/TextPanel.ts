@@ -9,6 +9,7 @@ import { isEmpty } from "../../utils/util";
 
 // Components
 import "../Chunk/Chunk";
+import "../InfoBox/InfoBox";
 
 @customElement("x-textpanel")
 export class TextPanel extends LitElement {
@@ -19,6 +20,7 @@ export class TextPanel extends LitElement {
         display: block;
         height: 100%;
         width: 100%;
+        padding-right: 8px;
         overflow-y: scroll;
       }
     `,
@@ -76,7 +78,7 @@ export class TextPanel extends LitElement {
 
   render() {
     if (isEmpty(this.chunks)) {
-      return html`<x-chunk content=${this.initialChunk}></x-chunk> `;
+      return html`<x-info-box content=${this.initialChunk}></x-info-box> `;
     }
 
     return html`<div>

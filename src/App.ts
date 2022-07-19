@@ -1,4 +1,5 @@
 import "@fontsource/inter";
+import "@fontsource/recursive";
 import { css, html, LitElement } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import "./style/styles.ts";
