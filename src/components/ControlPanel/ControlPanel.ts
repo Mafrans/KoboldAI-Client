@@ -14,6 +14,7 @@ export class ControlPanel extends LitElement {
     css`
       .input {
         display: flex;
+        align-items: center;
         gap: 16px;
       }
 
