@@ -13,7 +13,7 @@ export class Navbar extends LitElement {
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        padding: 16px 24px;
+        padding: 16px max(16px, 2vw);
         gap: 12px;
         background-color: var(--color-indigo-100);
         color: var(--color-indigo-800);

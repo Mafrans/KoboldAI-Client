@@ -22,9 +22,6 @@ export class App extends LitElement {
       height: 100vh;
     }
 
-    @media (min-width: 1280px) {
-    }
-
     x-navbar {
       grid-column: span 3;
     }
@@ -39,7 +36,7 @@ export class App extends LitElement {
       display: flex;
       gap: 8px;
       padding: 16px;
-      padding-top: 64px;
+      padding-top: min(3vw, 64px);
       flex-direction: column;
     }
   `;

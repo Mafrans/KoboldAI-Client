@@ -22,8 +22,13 @@ export class TextPanel extends LitElement {
         display: block;
         height: 100%;
         width: 100%;
-        padding-right: 8px;
         overflow-y: scroll;
+      }
+
+      @media (hover: hover) {
+        :host {
+          padding-right: 8px;
+	}
       }
     `,
   ];
