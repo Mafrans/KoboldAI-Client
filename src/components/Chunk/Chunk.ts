@@ -13,6 +13,18 @@ export class Chunk extends LitElement {
         line-height: 1.75;
       }
 
+      p:focus {
+        outline: none;
+        padding: 4px 0;
+        background-color: var(--color-indigo-100);
+        border-radius: 4px;
+      }
+
+      p::selection {
+        background-color: var(--color-indigo-500);
+        color: white;
+      }
+
       .line-break {
         margin-bottom: 1.25em;
       }

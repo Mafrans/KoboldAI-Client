@@ -22,6 +22,11 @@ export class TextField extends LitElement {
         outline: var(--outline-focus);
         outline-offset: 3px;
       }
+
+      input::selection {
+        background-color: var(--color-indigo-500);
+        color: white;
+      }
     `,
   ];
 
