@@ -5,7 +5,18 @@ import { IconType } from "./types";
 
 @customElement("x-icon")
 export class Icon extends LitElement {
-  static styles = [...globalStyles, css``];
+  static styles = [
+    ...globalStyles,
+    css`
+      :host {
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        display: inline-flex;
+      }
+    `,
+  ];
 
   @property()
   icon?: IconType;

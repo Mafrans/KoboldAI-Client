@@ -39,6 +39,7 @@ export class App extends LitElement {
       display: flex;
       gap: 8px;
       padding: 16px;
+      padding-top: 64px;
       flex-direction: column;
     }
   `;
