@@ -2,13 +2,14 @@ import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { map } from "lit/directives/map.js";
 import { globalStyles } from "../../style/styles";
-import { hasChunks, parseChunks } from "../../utils/chunk";
+import { hasChunks, parseChunks, Token } from "../../utils/chunk";
 import { ServerMessage } from "../../utils/messages";
 import { socket } from "../../utils/socket";
-import { isEmpty } from "../../utils/util";
+import { isEmpty, sleep } from "../../utils/util";
 
 // Components
 import "../Chunk/Chunk";
+import "../TokenStream/TokenStream";
 import "../InfoBox/InfoBox";
 
 @customElement("x-textpanel")
@@ -30,6 +31,9 @@ export class TextPanel extends LitElement {
   chunks: Record<number, string> = [];
 
   @state()
+  stream: string = "";
+
+  @state()
   initialChunk: string = "";
 
   constructor() {
@@ -39,7 +43,15 @@ export class TextPanel extends LitElement {
       console.log({ cmd, data });
       switch (cmd) {
         case ServerMessage.UPDATE_CHUNK:
+          this.stream = "";
           this.updateChunks(data.html);
+          break;
+
+        case ServerMessage.STREAM_TOKEN:
+          this.stream += data.reduce(
+            (a: string, t: Token) => a + t.decoded,
+            ""
+          );
           break;
 
         case ServerMessage.UPDATE_SCREEN:
@@ -86,6 +98,7 @@ export class TextPanel extends LitElement {
         Object.entries(this.chunks),
         ([_, chunk]) => html`<x-chunk editable content=${chunk}></x-chunk>`
       )}
+      <x-token-stream tokens=${this.stream}></x-token-stream>
     </div>`;
   }
 }

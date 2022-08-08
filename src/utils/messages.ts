@@ -58,6 +58,7 @@ export enum ServerMessage {
   HIDE_GENERATE_SEQUENCES = "hidegenseqs",
   UPDATE_CHUNK = "updatechunk",
   REMOVE_CHUNK = "removechunk",
+  STREAM_TOKEN = "streamtoken",
   ALLOW_TOGGLE = "allowtoggle",
   UPDATE_TEMP = "updatetemp",
   UPDATE_TO_PP = "updatetopp",

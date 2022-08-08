@@ -3,6 +3,11 @@ export type Chunk = {
   content: string;
 };
 
+export type Token = {
+  decoded: string;
+  probabilities: unknown;
+};
+
 const parser = new DOMParser();
 
 export function parseChunks(html: string): Chunk[] {
