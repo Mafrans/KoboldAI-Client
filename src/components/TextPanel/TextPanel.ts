@@ -18,6 +18,7 @@ export class TextPanel extends LitElement {
     ...globalStyles,
     css`
       :host {
+        box-sizing: border-box;
         display: block;
         height: 100%;
         width: 100%;

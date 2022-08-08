@@ -16,10 +16,13 @@ export class App extends LitElement {
   static styles = css`
     .app {
       display: grid;
-      grid-template-columns: 1fr 4fr 1fr;
       grid-template-rows: 70px 1fr;
+      grid-template-columns: calc(30vw - 200px) 1fr calc(30vw - 200px);
 
       height: 100vh;
+    }
+
+    @media (min-width: 1280px) {
     }
 
     x-navbar {
@@ -35,7 +38,7 @@ export class App extends LitElement {
       height: calc(100vh - 70px);
       display: flex;
       gap: 8px;
-      padding: 16px 0;
+      padding: 16px;
       flex-direction: column;
     }
   `;
@@ -61,7 +64,7 @@ export class App extends LitElement {
       <div class="app">
         <x-navbar></x-navbar>
 
-        <aside></aside>
+        <aside class="sidebar"></aside>
 
         <main>
           <x-textpanel></x-textpanel>
@@ -71,7 +74,7 @@ export class App extends LitElement {
           ></x-control-panel>
         </main>
 
-        <aside></aside>
+        <aside class="sidebar"></aside>
       </div>
     `;
   }

@@ -5,6 +5,8 @@ import { styleMap } from "lit/directives/style-map.js";
 import { globalStyles } from "../../style/styles";
 import { sleep } from "../../utils/util";
 
+import "../Chunk/Chunk";
+
 @customElement("x-token-stream")
 export class TokenStream extends LitElement {
   static styles = [globalStyles, css``];
@@ -35,6 +37,8 @@ export class TokenStream extends LitElement {
   }
 
   render() {
-    return html` <span>${this.tokens.slice(0, this.progress)}</span> `;
+    return html`
+      <x-chunk content=${this.tokens.slice(0, this.progress)}></x-chunk>
+    `;
   }
 }

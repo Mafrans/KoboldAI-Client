@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   --outline-focus: var(--color-indigo-500) solid 3px;
