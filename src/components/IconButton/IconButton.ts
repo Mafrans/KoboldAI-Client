@@ -13,6 +13,8 @@ export class IconButton extends LitElement {
     css`
       :host {
         display: contents;
+        background: var(--color-indigo-200);
+        color: var(--color-indigo-900);
       }
 
       button {
@@ -23,8 +25,8 @@ export class IconButton extends LitElement {
         align-items: center;
         border-radius: 999px;
         border: none;
-        background: var(--color-indigo-200);
-        color: var(--color-indigo-900);
+        background: inherit;
+        color: inherit;
         cursor: pointer;
         transition: opacity 125ms ease, transform 125ms ease;
       }

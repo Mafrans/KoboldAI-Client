@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
 import { globalStyles } from "../../style/styles";
 
 @customElement("x-navbar")
@@ -13,6 +14,7 @@ export class Navbar extends LitElement {
         display: flex;
         align-items: center;
         padding: 16px 24px;
+        gap: 12px;
         background-color: var(--color-indigo-100);
         color: var(--color-indigo-800);
       }
@@ -24,7 +26,9 @@ export class Navbar extends LitElement {
         align-items: center;
         font-weight: 700;
         border-radius: 999px;
-        padding: 8px 16px;
+        padding: 0 16px;
+        height: 42px;
+        color: inherit;
         background-color: var(--color-indigo-50);
       }
 
@@ -37,6 +41,12 @@ export class Navbar extends LitElement {
 
   render() {
     return html`<div class="navbar">
+      <x-icon-button
+        style=${styleMap({
+          background: "var(--color-indigo-50)",
+        })}
+        icon="menu"
+      ></x-icon-button>
       <a href="/" class="brand">
         <!-- 🦊 -->
         <img
